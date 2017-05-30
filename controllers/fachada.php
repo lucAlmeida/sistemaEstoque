@@ -121,13 +121,16 @@
         }
 
         public function consultar($entidade) {
-            $dao = $this->daos[get_class($entidade)];
-            return $dao->consultar($entidade);
+            $classe = $entidade['classe'];
+            $id = $entidade['id'];
+            $dao = $this->daos[$classe];
+            return $dao->consultar($id);
         }
 
         public function consultarTodos($entidade) {
-            $dao = $this->daos[$entidade];
-            return $dao->consultarTodos($entidade);
+            $classe = $entidade;
+            $dao = $this->daos[$classe];
+            return $dao->consultarTodos($classe);
         }
     }
 ?>

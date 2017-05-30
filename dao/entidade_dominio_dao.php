@@ -39,8 +39,8 @@
         }
 
         public function consultar($entidade) {
-            $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
-            $query = "SELECT * FROM entidades_dominio WHERE `id_entidade`={$id_entidade}";
+            $id = $entidade;
+            $query = "SELECT * FROM entidades_dominio WHERE `id`={$id}";
             $result = mysqli_query($this->conn, $query);            
             $ent = mysqli_fetch_assoc($result);
             mysqli_free_result($result);

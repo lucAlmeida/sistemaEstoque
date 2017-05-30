@@ -59,8 +59,8 @@
         }
 
         public function consultar($entidade) {
-            $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
-            $query = "SELECT * FROM enderecos WHERE id_entidade={$id_entidade}";
+            $id = $entidade;
+            $query = "SELECT * FROM enderecos WHERE id={$id}";
             $result = mysqli_query($this->conn, $query);
             $endereco = mysqli_fetch_assoc($result);
             mysqli_free_result($result);

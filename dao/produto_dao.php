@@ -50,9 +50,8 @@
         }
 
         public function consultar($entidade) {
-            parent::consultar($entidade);
-            $id = mysqli_real_escape_string($this->conn, $entidade->getId());
-            $query = "SELECT * FROM produtos WHERE id_entidade={$id}";
+            $id = $entidade;
+            $query = "SELECT * FROM produtos WHERE id={$id}";
             $result = mysqli_query($this->conn, $query);
             $produto = mysqli_fetch_assoc($result);
             mysqli_free_result($result);

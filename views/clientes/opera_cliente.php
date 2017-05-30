@@ -16,22 +16,15 @@
     <?php 
           $_POST['operacao'] = CONSULTAR_TODOS;
           $clHandler = new Handler();
-          $clientes = $clHandler->handlePost(false, false);          
+          $clientes = $clHandler->handlePost(false, false);
     ?>
-    <div class="table-responsive">
+    <div class="table-responsive" style="font-size: 12px;">
         <table class="table table-stripped">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Logradouro</th>
-                    <th>Numero</th>
-                    <th>CEP</th>
-                    <th>Complemento</th>
-                    <th>Bairro</th>
-                    <th>Cidade</th>
-                    <th>Estado</th>
                     <th>Telefone</th>
                     <th>CPF</th>
                     <th>Crédito</th>
@@ -44,17 +37,18 @@
                     <td><?php echo $cliente['id'] ?></td>
                     <td><?php echo $cliente['nome'] ?></td>
                     <td><?php echo $cliente['email'] ?></td>
-                    <td><?php echo $cliente['logradouro'] ?></td>
-                    <td><?php echo $cliente['numero'] ?></td>
-                    <td><?php echo $cliente['cep'] ?></td>
-                    <td><?php echo $cliente['complemento'] ?></td>
-                    <td><?php echo $cliente['bairro'] ?></td>
-                    <td><?php echo $cliente['cidade'] ?></td>
-                    <td><?php echo $cliente['estado'] ?></td>
                     <td><?php echo $cliente['telefone'] ?></td>
                     <td><?php echo $cliente['cpf'] ?></td>
                     <td><?php echo $cliente['credito'] ?></td>
                     <td><?php echo $cliente['dt_cadastro'] ?></td>
+                    <!-- Split button -->
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-primary" href="consultar_cliente.php?id=<?php echo $cliente['id']; ?>&operacao=<?php echo 'consultar'; ?>">Visualizar</a>
+                            <a class="btn btn-default" href="alterar_cliente.php?id=<?php echo $cliente['id'] ?>">Alterar</a>
+                            <button type="button" class="btn btn-danger">Excluir</button>
+                        </div>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -63,9 +57,6 @@
 
     <form id="operacoes" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <button class="btn btn-success" type="submit" name="operacao" value="salvar">Inserir Cliente</button>
-        <button class="btn btn-default" type="submit" name="operacao" value="alterar">Alterar Cliente</button>
-        <button class="btn btn-primary" type="submit" name="operacao" value="consultar">Consultar Cliente</button>
-        <button class="btn btn-danger" type="submit" name="operacao" value="excluir">Excluir Cliente</button>
     </form>
 </div>
 <?php include_once dirname(__DIR__)."/../inc/footer.php"; ?>

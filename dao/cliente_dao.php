@@ -47,8 +47,13 @@
         }
 
         public function consultar($entidade) {
-            $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
-            $query = "SELECT * FROM clientes WHERE `id_entidade`={$id_entidade}";
+            $id = $entidade;
+            $query = "SELECT c.*, p.*, e.*, ed.dt_cadastro
+                      FROM clientes c
+                      INNER JOIN pessoas p ON c.id_entidade = p.id_entidade
+                      INNER JOIN enderecos e ON p.id_endereco = e.id_entidade
+                      INNER JOIN entidades_dominio ed ON c.id_entidade = ed.id
+                      WHERE c.id = {$id}";
             $result = mysqli_query($this->conn, $query);
             $cliente = mysqli_fetch_assoc($result);
             mysqli_free_result($result);
@@ -57,7 +62,7 @@
         }
 
         public function consultarTodos($entidade) {
-            $query = "SELECT c.*, p.*, e.*, ed.dt_cadastro 
+            $query = "SELECT c.*, p.*, e.*, ed.dt_cadastro
                       FROM clientes c
                       INNER JOIN pessoas p ON c.id_entidade = p.id_entidade
                       INNER JOIN enderecos e ON p.id_endereco = e.id_entidade

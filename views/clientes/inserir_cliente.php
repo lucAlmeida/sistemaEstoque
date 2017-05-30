@@ -63,7 +63,7 @@
         <div class="form-group">
             <label>Estado</label>
             <input type="text" name="estado" class="form-control"
-                   placeholder="Seu número" />
+                   placeholder="Seu estado" />
         </div>
 
         <div class="form-group">
