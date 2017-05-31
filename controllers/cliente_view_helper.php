@@ -60,7 +60,7 @@
                 header('Location: '.ROOT_URL.'/views/clientes/consultar_cliente.php');
             } else if ($op == CONSULTAR_TODOS) {
             } else if ($op == EXCLUIR) {
-                header('Location: '.ROOT_URL.'/views/clientes/excluir_cliente.php');
+                header('Location: '.ROOT_URL.'/views/clientes/opera_cliente.php');
             } else {
                 header('Location: '.ROOT_URL);
                 return null;

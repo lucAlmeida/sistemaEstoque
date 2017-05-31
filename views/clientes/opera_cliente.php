@@ -50,7 +50,9 @@
                             <a href="alterar_cliente.php?id=<?php echo $cliente['id']; ?>&operacao=<?php echo 'alterar'; ?>">
                                 <button class="btn btn-default">Alterar</button>
                             </a>
-                            <a href="#"><button type="button" class="btn btn-danger">Excluir</button></a>
+                            <a href="excluir_cliente.php?id=<?php echo $cliente['id']; ?>&operacao=<?php echo 'excluir'; ?>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </a>
                         </div>
                     </td>
                 </tr>

@@ -34,7 +34,6 @@
         public function excluir($entidade) {
             parent::excluir($entidade);
             $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
-
             $query = "DELETE FROM clientes WHERE id_entidade={$id_entidade}";
 
             if (mysqli_query($this->conn, $query)) {

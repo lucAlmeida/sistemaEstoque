@@ -96,7 +96,7 @@
                    value="<?php echo $cliente['credito']; ?>" placeholder="Seu crédito" />
         </div>
         <input type="hidden" name="operacao" value="alterar" />
-        <input type="submit" class="btn btn-success" value="Alterar" />
+        <input type="submit" class="btn btn-default" value="Alterar" />
     </form>
 </div>
 <?php include_once dirname(__DIR__).'/../inc/footer.php'; ?>

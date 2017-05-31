@@ -42,6 +42,7 @@
         public function excluir($entidade) {
             parent::excluir($entidade);
             $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
+            (new ExcluirCommand())->execute($entidade->getEndereco());
 
             $query = "DELETE FROM pessoas WHERE id_entidade={$id_entidade}";
 

@@ -40,15 +40,18 @@
             $arrClienteAlterar = array($valCliente,
                                        $valExiste,
                                        $cDt);
+            $arrClienteExcluir = array($cDt);
 
             $arrFornecedorSalvar = array($cDt);
 
             $arrEnderecoSalvar = array($cDt);
             $arrEnderecoAlterar = array($cDt);
+            $arrEnderecoExcluir = array($cDt);
 
             $contextoCliente = array();
             $contextoCliente[SALVAR] = $arrClienteSalvar;
             $contextoCliente[ALTERAR] = $arrClienteAlterar;
+            $contextoCliente[EXCLUIR] = $arrClienteExcluir;
 
             $contextoFornecedor = array();
             $contextoFornecedor[SALVAR] = $arrFornecedorSalvar;
@@ -56,6 +59,7 @@
             $contextoEndereco = array();
             $contextoEndereco[SALVAR] = $arrEnderecoSalvar;
             $contextoEndereco[ALTERAR] = $arrEnderecoAlterar;
+            $contextoEndereco[EXCLUIR] = $arrEnderecoExcluir;
 
             $this->requisitos = array();
             $this->requisitos[Cliente::class] = $contextoCliente;
@@ -116,7 +120,7 @@
 
         public function excluir($entidade) {
             $message = $this->executarRegras($entidade, EXCLUIR);
-            if (strlen($message) > 0) {
+            if (strlen($message) > 0 and $message != 'ok') {
                 return $message;
             } else {
                 $dao = $this->daos[get_class($entidade)];
