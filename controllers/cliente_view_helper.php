@@ -21,12 +21,21 @@
             $complemento = $request['complemento'];
             $bairro = $request['bairro'];
             $endereco = new Endereco($logradouro, $numero, $cep, $complemento, $bairro, $cidade);
-
+            if (isset($request['id_endereco'])) {
+                $endereco->setId($request['id_endereco']);
+            }
             $telefone = $request['telefone'];
             $cpf = $request['cpf'];
             $credito = $request['credito'];
 
             $cliente = new Cliente($nome, $email, $endereco, $telefone, $cpf, $credito);
+            if (isset($request['id_entidade'])) {
+                $cliente->setId($request['id_entidade']);
+            }
+            if (isset($request['dt_cadastro'])) {
+                $cliente->setDtCadastro($request['dt_cadastro']);
+            }
+
             return $cliente;
         }
 
@@ -46,7 +55,7 @@
                     header('Location: '.ROOT_URL."/views/clientes/inserir_cliente.php?msg={$msg}");
                 }
             } else if ($op == ALTERAR) {
-                header('Location: '.ROOT_URL.'/views/clientes/alterar_cliente.php');
+                header('Location: '.ROOT_URL."/views/clientes/consultar_cliente.php?id={$request['id']}&operacao=consultar");
             } else if ($op == CONSULTAR) {
                 header('Location: '.ROOT_URL.'/views/clientes/consultar_cliente.php');
             } else if ($op == CONSULTAR_TODOS) {

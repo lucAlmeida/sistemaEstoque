@@ -2,19 +2,17 @@
     include_once dirname(__DIR__).'/../config/config.php';
     include_once dirname(__DIR__).'/../config/db.php';
     include_once dirname(__DIR__).'/../controllers/handler.php';
-?>
 
-<?php include_once dirname(__DIR__).'/../inc/header.php'; ?>
-<?php
     $clHandler = new Handler();
     $cliente = $clHandler->handleGet();
 ?>
 
+<?php include_once dirname(__DIR__).'/../inc/header.php'; ?>
 <div class="container">
     <h1>Consultar Cliente</h1>
     <div class="form-group">
         <label>ID</label>
-        <input type="text" name="nome" class="form-control"
+        <input type="text" name="id" class="form-control"
                value="<?php echo $cliente['id']; ?>" disabled/>
     </div>
     <div class="form-group">

@@ -1,6 +1,5 @@
 <?php
     include_once('entidade_dominio_dao.php');
-    include_once dirname(__DIR__).'/controllers/salvar_command.php';
 
     class PessoaDAO extends EntidadeDominioDAO {
         public function inserir($entidade) {
@@ -25,16 +24,14 @@
             parent::alterar($entidade);
             $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
             $nome = mysqli_real_escape_string($this->conn, $entidade->getNome());
-            $email = mysqli_real_escape_string($this->conn, $entidade->getEmail());
-            $id_endereco = mysqli_real_escape_string($this->conn, $entidade->getEndereco()->getId());
+            $email = mysqli_real_escape_string($this->conn, $entidade->getEmail());            
+            (new AlterarCommand())->execute($entidade->getEndereco());
             $telefone = mysqli_real_escape_string($this->conn, $entidade->getTelefone());
 
             $query = "UPDATE pessoas SET nome='$nome',
                                          email='$email',
-                                         id_endereco='$id_endereco',
                                          telefone='$telefone'
                                          WHERE id_entidade={$id_entidade}";
-
             if (mysqli_query($this->conn, $query)) {
                 return 'ok';
             } else {

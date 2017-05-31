@@ -21,11 +21,9 @@
             $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
             $cpf = mysqli_real_escape_string($this->conn, $entidade->getCpf());
             $credito = mysqli_real_escape_string($this->conn, $entidade->getCredito());
-
             $query = "UPDATE clientes SET cpf='$cpf',
                                           credito='$credito'
                                           WHERE id_entidade={$id_entidade}";
-
             if (mysqli_query($this->conn, $query)) {
                 return 'ok';
             } else {
@@ -48,7 +46,11 @@
 
         public function consultar($entidade) {
             $id = $entidade;
-            $query = "SELECT c.*, p.*, e.*, ed.dt_cadastro
+            $query = "SELECT c.id, c.id_entidade, c.cpf, c.credito,
+                             p.nome, p.email, p.id_endereco,
+                             p.telefone, e.logradouro, e.numero, 
+                             e.complemento, e.cep, e.bairro, e.cidade,
+                             e.cidade, e.estado, ed.dt_cadastro
                       FROM clientes c
                       INNER JOIN pessoas p ON c.id_entidade = p.id_entidade
                       INNER JOIN enderecos e ON p.id_endereco = e.id_entidade

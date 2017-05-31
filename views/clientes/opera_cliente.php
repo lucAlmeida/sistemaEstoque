@@ -44,9 +44,13 @@
                     <!-- Split button -->
                     <td>
                         <div class="btn-group" role="group">
-                            <a class="btn btn-primary" href="consultar_cliente.php?id=<?php echo $cliente['id']; ?>&operacao=<?php echo 'consultar'; ?>">Visualizar</a>
-                            <a class="btn btn-default" href="alterar_cliente.php?id=<?php echo $cliente['id'] ?>">Alterar</a>
-                            <button type="button" class="btn btn-danger">Excluir</button>
+                            <a href="consultar_cliente.php?id=<?php echo $cliente['id']; ?>&operacao=<?php echo 'consultar'; ?>">
+                                <button class="btn btn-info">Visualizar</button>
+                            </a>
+                            <a href="alterar_cliente.php?id=<?php echo $cliente['id']; ?>&operacao=<?php echo 'alterar'; ?>">
+                                <button class="btn btn-default">Alterar</button>
+                            </a>
+                            <a href="#"><button type="button" class="btn btn-danger">Excluir</button></a>
                         </div>
                     </td>
                 </tr>

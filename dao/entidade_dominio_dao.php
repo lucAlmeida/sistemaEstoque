@@ -15,21 +15,22 @@
         }
 
         public function alterar($entidade) {
-            $query = "UPDATE entidades_dominio SET dt_cadastro='$dt_cadastro',
-                                               WHERE id_entidade={$id_entidade}";
-            $dt_cadastro = mysqli_real_escape_string($conn, $entidade->getDtCadastro());
+            $id = mysqli_real_escape_string($this->conn, $entidade->getId());
+            $dt_cadastro = mysqli_real_escape_string($this->conn, $entidade->getDtCadastro());
 
-            if (mysqli_query($conn, $query)) {
+            $query = "UPDATE entidades_dominio SET dt_cadastro='$dt_cadastro'
+                                               WHERE id={$id}";
+            if (mysqli_query($this->conn, $query)) {
                 return 'ok';
             } else {
                 return 'ERROR: '.mysqli_error($this->conn);
-            }            
+            }
         }
 
         public function excluir($entidade) {
-            $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
+            $id = mysqli_real_escape_string($this->conn, $entidade->getId());
 
-            $query = "DELETE FROM entidades_dominio WHERE id_entidade={$id_entidade}";
+            $query = "DELETE FROM entidades_dominio WHERE id={$id}";
 
             if (mysqli_query($this->conn, $query)) {
                 return 'ok';

@@ -35,14 +35,12 @@
         public function handlePost($view=true, $entity=true) {
             $uri = $_SERVER['REQUEST_URI'];
             $operacao = $_POST['operacao'];
-            $vh = self::$view_helpers[$uri];
-
-            $entidade = ($entity ? $vh->getEntidade($_REQUEST) : $vh->getClasse());
-            $cmd = self::$commands[$operacao];            
+            $vh = self::$view_helpers[$uri];            
+            $entidade = ($entity ? $vh->getEntidade($_POST) : $vh->getClasse());
+            $cmd = self::$commands[$operacao];     
             $obj = $cmd->execute($entidade);
-
             if ($view) {
-                $vh->setView($obj, $_REQUEST);
+                $vh->setView($obj, $_POST);
             }
             return $obj;
         }
@@ -52,7 +50,7 @@
             $operacao = $_GET['operacao'];
             $vh = self::$view_helpers[$uri];
             $cmd = self::$commands[$operacao];
-            $class_and_id = array('classe' => $vh->getClasse(), 'id' => $_GET['id']);
+            $class_and_id = array('classe' => $vh->getClasse(), 'id' => $_GET['id']);            
             $obj = $cmd->execute($class_and_id);
             return $obj;
         }

@@ -23,19 +23,22 @@
 
         public function alterar($entidade) {
             parent::alterar($entidade);
+            $id_entidade = mysqli_real_escape_string($this->conn, $entidade->getId());
             $logradouro = mysqli_real_escape_string($this->conn, $entidade->getLogradouro());
             $numero = mysqli_real_escape_string($this->conn, $entidade->getNumero());
             $complemento = mysqli_real_escape_string($this->conn, $entidade->getComplemento());
             $cep = mysqli_real_escape_string($this->conn, $entidade->getCep());
             $bairro = mysqli_real_escape_string($this->conn, $entidade->getBairro());
-            $id_cidade = mysqli_real_escape_string($this->conn, $entidade->getCidade()->getId());
+            $cidade = mysqli_real_escape_string($this->conn, $entidade->getCidade()->getNome());
+            $estado = mysqli_real_escape_string($this->conn, $entidade->getCidade()->getEstado()->getNome());
 
             $query = "UPDATE enderecos SET logradouro='$logradouro',
                                            numero='$numero',
                                            complemento = '$complemento',
                                            cep='$cep',
                                            bairro='$bairro',
-                                           cidade='$cidade'
+                                           cidade='$cidade',
+                                           estado='$estado'
                                            WHERE id_entidade={$id_entidade}";
 
             if (mysqli_query($this->conn, $query)) {

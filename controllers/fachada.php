@@ -36,11 +36,15 @@
                                       $valCredito,
                                       $valExiste,
                                       $cDt);
+
             $arrClienteAlterar = array($valCliente,
                                        $valExiste,
                                        $cDt);
+
             $arrFornecedorSalvar = array($cDt);
+
             $arrEnderecoSalvar = array($cDt);
+            $arrEnderecoAlterar = array($cDt);
 
             $contextoCliente = array();
             $contextoCliente[SALVAR] = $arrClienteSalvar;
@@ -51,6 +55,7 @@
 
             $contextoEndereco = array();
             $contextoEndereco[SALVAR] = $arrEnderecoSalvar;
+            $contextoEndereco[ALTERAR] = $arrEnderecoAlterar;
 
             $this->requisitos = array();
             $this->requisitos[Cliente::class] = $contextoCliente;
@@ -90,9 +95,9 @@
                 return $message;
             } else {
                 $dao = $this->daos[get_class($entidade)];
-                $msg = $dao->inserir($entidade);
-                if (strlen($msg) > 0 and $msg !== 'ok') {
-                    return $msg;
+                $sql_arr = $dao->inserir($entidade);
+                if (strlen($sql_arr) > 0 and $sql_arr !== 'ok') {
+                    return $sql_arr;
                 }
                 return 'ok';
             }
@@ -100,11 +105,11 @@
 
         public function alterar($entidade) {
             $message = $this->executarRegras($entidade, ALTERAR);
-            if (strlen($message) > 0) {
+            if (strlen($message) > 0 and $message != 'ok') {
                 return $message;
             } else {
-                $dao = $this->daos[get_class($entidade)];
-                $dao->alterar($entidade);
+                $dao = $this->daos[get_class($entidade)];             
+                $sql_arr = $dao->alterar($entidade);
                 return 'ok';
             }
         }
